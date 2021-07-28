@@ -1,0 +1,27 @@
+* {
+    box-sizing: border-box;
+}
+
+#user-form {
+    width: 70%;
+    line-height: 10px;
+    text-align: center;    
+}
+#user-input {
+    display: block;
+    padding: 0 0;
+    width: 100%;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.submit-button {
+    width: 80px;
+    background-color: blue;
+    color: white;
+    padding: 7px;
+    border: 0px;
+}
