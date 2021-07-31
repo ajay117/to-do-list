@@ -1,9 +1,9 @@
-const form = document.getElementById('user-form');
+let form = document.getElementById('user-form');
 let userInput = document.querySelector('#user-input');
 let toDoItemsContainer = document.querySelector('.to-do-list');
 let addToDoMarker = document.querySelector('.add-to-do-marker');
 let submitButton = document.querySelector('.submit-button');
-
+let cancelButton = document.querySelector('.cancel-button');
 
 form.addEventListener('submit',toDoLogic);
 addToDoMarker.addEventListener('click', () => {
@@ -11,6 +11,10 @@ addToDoMarker.addEventListener('click', () => {
     userInput.focus();
 });
 submitButton.addEventListener('click',hideForm);
+cancelButton.addEventListener('click', () => {
+    hideForm();
+    form.reset();
+});
 
 //Function Declarations...
 function toDoLogic(event) {
@@ -31,22 +35,19 @@ function addToDoElement() {
     button.innerHTML = '<i class="fas fa-trash-alt"></i>';
     button.style.width = '25px';
     button.style.borderRadius = '5px';
-    button.classList.add('btn');
-    button.classList.add('btn-danger');
+    button.classList.add('btn','btn-danger');
         
     div.classList.add('flex','flex-align-baseline');
     div.style.margin = '0 0 10px 0';
 
     createCheckbox.classList.add('flex-child');
     para.classList.add('flex-child');
-    button.classList.add('flex-child');
-    
+    button.classList.add('flex-child');    
 
     div.appendChild(createCheckbox);
     div.appendChild(para);
     div.appendChild(button);
-    toDoItemsContainer.appendChild(div);
-    
+    toDoItemsContainer.appendChild(div);    
     
     button.addEventListener('click', () => {
         toDoItemsContainer.removeChild(div);
