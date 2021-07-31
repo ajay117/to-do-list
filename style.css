@@ -14,7 +14,7 @@ h1 {
 
 /* ||ID */
 #user-form {
-    width: 70%;
+    min-width: 70%;
     line-height: 10px;
     text-align: center;
     background-color: white;
@@ -26,14 +26,15 @@ h1 {
 .global-container {
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
 }
 .aside {
-    flex: 1 0 0;
+    flex: 1 0 auto;
     border-right: 2px solid black;
     height: 100vh;
 }
 .main {
-    flex: 3 0 0;
+    flex: 4 0 auto;
 }
 .user-input,
 .description {
@@ -117,6 +118,9 @@ h1 {
 @media screen and (max-width: 1000px) {
     .user-title,
     .user-description {
+        display: none;
+    }
+    .aside {
         display: none;
     }
 }
