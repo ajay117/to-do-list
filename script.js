@@ -5,6 +5,11 @@ let toDoItemsContainer = document.querySelector('.to-do-list');
 let addToDoMarker = document.querySelector('.add-to-do-marker');
 let submitButton = document.querySelector('.submit-button');
 let cancelButton = document.querySelector('.cancel-button');
+let toDoObjectArray = []; //Store all to do as obects in Array.
+
+if(localStorage.length > 0) {
+    toDoObjectArray = localStorage.getItem(JSON.parse('toDoObjectArray'));
+}
 
 form.addEventListener('submit',toDoLogic);
 addToDoMarker.addEventListener('click', () => {
@@ -29,18 +34,36 @@ userInputDescription.addEventListener('focus', (e) => {
 });
 
 //Function Declarations...
-function toDoLogic(event) {
-    addToDoElement();
+function toDoLogic(e) {
+    e.preventDefault();
+    toDoContainerPopulate();
+    toDoObjectPopulate();
+    fillDefaultValues();
     form.reset();
-    fillDefaultValues();    
-    event.preventDefault();
 }
 
-function addToDoElement() {
-    let userToDo = userInput.value;
-    let userDescription = userInputDescription.value;
-    let div = document.createElement('div');
-    let usertoDoDiv = document.createElement('div');
+function toDoObjectPopulate() {
+    toDoObjectArray.push(toDoElement(userInput.value, userInputDescription.value));
+    localStorage.setItem('toDoObjectArray', JSON.stringify(toDoObjectArray));
+}
+
+
+//Factory function to create user to do object...
+function toDoElement(title,description) {
+    return {
+        title,
+        description
+        // dueDate,
+        // priority
+    }
+}
+
+function toDoContainerPopulate() {
+    // let userToDoValue = userInput.value;
+    // let userDescriptionValue = userInputDescription.value;
+
+    let div = document.createElement('div');    
+    let usertoDoDiv = document.createElement('div'); //Div container for user to do elements...
     let paraTitle = document.createElement('p');
     let paraDescription = document.createElement('p');
     let button = document.createElement('button');
@@ -48,8 +71,8 @@ function addToDoElement() {
     
     createCheckbox.type = 'checkbox';
 
-    paraTitle.innerHTML = '<span class="user-title">Title :</span> ' + userToDo;
-    paraDescription.innerHTML = '<span class="user-description">Description :</span> ' + userDescription;
+    paraTitle.innerHTML = '<span class="user-title">Title :</span> ' + userToDoValue;
+    paraDescription.innerHTML = '<span class="user-description">Description :</span> ' + userDescriptionValue;
 
     button.innerHTML = '<i class="fas fa-trash-alt"></i>';
     button.style.width = '25px';
@@ -70,6 +93,7 @@ function addToDoElement() {
     div.appendChild(createCheckbox);
     div.appendChild(usertoDoDiv);
     div.appendChild(button);
+    div.classList.add('border');
     toDoItemsContainer.appendChild(div);    
     
     button.addEventListener('click', () => {
