@@ -1,5 +1,5 @@
 let form = document.getElementById('user-form');
-let userInput = document.querySelector('.user-input');
+let userInputTitle = document.querySelector('.user-input');
 let userInputDescription = document.querySelector('.description');
 let toDoItemsContainer = document.querySelector('.to-do-list');
 let addToDoMarker = document.querySelector('.add-to-do-marker');
@@ -8,7 +8,8 @@ let cancelButton = document.querySelector('.cancel-button');
 let toDoObjectArray = []; //Store all to do as obects in Array.
 
 if(localStorage.length > 0) {
-    toDoObjectArray = localStorage.getItem(JSON.parse('toDoObjectArray'));
+    let localStorageStr = localStorage.getItem('toDoObjectArray');
+    toDoObjectArray = JSON.parse(localStorageStr);
 }
 
 form.addEventListener('submit',toDoLogic);
@@ -23,9 +24,9 @@ cancelButton.addEventListener('click', () => {
     form.reset();
 });
 
-userInput.addEventListener('focus', (e) => {
+userInputTitle.addEventListener('focus', (e) => {
     e.target.value = '';
-    userInput.classList.remove('text-light');
+    userInputTitle.classList.remove('text-light');
 });
 
 userInputDescription.addEventListener('focus', (e) => {
@@ -36,14 +37,14 @@ userInputDescription.addEventListener('focus', (e) => {
 //Function Declarations...
 function toDoLogic(e) {
     e.preventDefault();
-    toDoContainerPopulate();
+    toDoContainerPopulate(userInputTitle, userInputDescription);
     toDoObjectPopulate();
     fillDefaultValues();
     form.reset();
 }
 
 function toDoObjectPopulate() {
-    toDoObjectArray.push(toDoElement(userInput.value, userInputDescription.value));
+    toDoObjectArray.push(toDoElement(userInputTitle.value, userInputDescription.value));
     localStorage.setItem('toDoObjectArray', JSON.stringify(toDoObjectArray));
 }
 
@@ -58,12 +59,12 @@ function toDoElement(title,description) {
     }
 }
 
-function toDoContainerPopulate() {
+function toDoContainerPopulate(userTitle,userDescription) {
     // let userToDoValue = userInput.value;
     // let userDescriptionValue = userInputDescription.value;
 
-    let div = document.createElement('div');    
-    let usertoDoDiv = document.createElement('div'); //Div container for user to do elements...
+    let div = document.createElement('div');
+    let usertoDoDiv = document.createElement('div');
     let paraTitle = document.createElement('p');
     let paraDescription = document.createElement('p');
     let button = document.createElement('button');
@@ -71,8 +72,8 @@ function toDoContainerPopulate() {
     
     createCheckbox.type = 'checkbox';
 
-    paraTitle.innerHTML = '<span class="user-title">Title :</span> ' + userToDoValue;
-    paraDescription.innerHTML = '<span class="user-description">Description :</span> ' + userDescriptionValue;
+    paraTitle.innerHTML = '<span class="user-title">Title :</span> ' + userTitle.value;
+    paraDescription.innerHTML = '<span class="user-description">Description :</span> ' + userDescription.value;
 
     button.innerHTML = '<i class="fas fa-trash-alt"></i>';
     button.style.width = '25px';
@@ -117,8 +118,8 @@ function hideForm() {
 }
 
 function fillDefaultValues() {
-    userInput.value = 'Title...';
-    userInput.classList.add('text-light');
+    userInputTitle.value = 'Title...';
+    userInputTitle.classList.add('text-light');
     userInputDescription.textContent = 'Description...';
     userInputDescription.classList.add('text-light');
 }
