@@ -11,6 +11,9 @@ h1 {
     font-weight: 400;
     text-decoration: underline;
 }
+textarea {
+    resize: none;
+}
 
 /* ||ID */
 #user-form {
@@ -35,6 +38,7 @@ h1 {
 }
 .main {
     flex: 4 0 auto;
+    max-width: 100%;
 }
 .user-input,
 .description {
@@ -59,7 +63,7 @@ h1 {
     margin: 5px;
 }
 .flex-grow {
-    flex: 1 0 auto;
+    flex: 1;
 }
 .to-do-list {
     width: 70%;
@@ -109,10 +113,9 @@ h1 {
 .border {
     border: 1px solid silver;
 }
-/* .angle-down-icon {
-    margin-left: 30px;
-} */
-
+.box {
+    max-width: 100%;
+}
 /* ||Media Queries */
 
 @media screen and (max-width: 1000px) {
