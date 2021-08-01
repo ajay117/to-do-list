@@ -10,11 +10,16 @@ let toDoObjectArray = []; //Store all to do as obects in Array.
 if(localStorage.length > 0) {
     let localStorageStr = localStorage.getItem('toDoObjectArray');
     toDoObjectArray = JSON.parse(localStorageStr);
+
+    toDoObjectArray.forEach(obj => {
+        toDoContainerPopulate(obj.title, obj.description);
+    });
 }
 
 form.addEventListener('submit',toDoLogic);
 addToDoMarker.addEventListener('click', () => {
     popUpForm();
+    toDoItemsContainer.classList.add('hide');
 });
 
 submitButton.addEventListener('click',hideForm);
@@ -22,6 +27,7 @@ submitButton.addEventListener('click',hideForm);
 cancelButton.addEventListener('click', () => {
     hideForm();
     form.reset();
+    toDoItemsContainer.classList.remove('hide');
 });
 
 userInputTitle.addEventListener('focus', (e) => {
@@ -37,8 +43,9 @@ userInputDescription.addEventListener('focus', (e) => {
 //Function Declarations...
 function toDoLogic(e) {
     e.preventDefault();
-    toDoContainerPopulate(userInputTitle, userInputDescription);
     toDoObjectPopulate();
+    toDoContainerPopulate(toDoObjectArray[toDoObjectArray.length -1]);
+    toDoItemsContainer.classList.remove('hide');
     fillDefaultValues();
     form.reset();
 }
@@ -59,33 +66,31 @@ function toDoElement(title,description) {
     }
 }
 
-function toDoContainerPopulate(userTitle,userDescription) {
-    // let userToDoValue = userInput.value;
-    // let userDescriptionValue = userInputDescription.value;
 
+//Create and Add 'To Do' elements to DOM...
+function toDoContainerPopulate(obj) {
     let div = document.createElement('div');
-    let usertoDoDiv = document.createElement('div');
+    let usertoDoDiv = document.createElement('div'); //Div container for user to do elements...  2nd div
     let paraTitle = document.createElement('p');
     let paraDescription = document.createElement('p');
-    let button = document.createElement('button');
+    let deleteBtn = document.createElement('button');
     let createCheckbox = document.createElement('input');
-    
     createCheckbox.type = 'checkbox';
 
-    paraTitle.innerHTML = '<span class="user-title">Title :</span> ' + userTitle.value;
-    paraDescription.innerHTML = '<span class="user-description">Description :</span> ' + userDescription.value;
+    paraTitle.innerHTML = '<span class="user-title">Title :</span> ' + obj.title;
+    paraDescription.innerHTML = '<span class="user-description">Description :</span> ' + obj.description;
 
-    button.innerHTML = '<i class="fas fa-trash-alt"></i>';
-    button.style.width = '25px';
-    button.style.borderRadius = '5px';
-    button.classList.add('btn','btn-danger');
+    deleteBtn.innerHTML = '<i class="fas fa-trash-alt"></i>';
+    deleteBtn.style.width = '25px';
+    deleteBtn.style.borderRadius = '5px';
+    deleteBtn.classList.add('btn','btn-danger');
         
     div.classList.add('flex','flex-align-baseline');
     div.style.margin = '0 0 10px 0';
 
     createCheckbox.classList.add('flex-child');
     usertoDoDiv.classList.add('flex-child');
-    button.classList.add('flex-child');
+    deleteBtn.classList.add('flex-child');
     
     usertoDoDiv.appendChild(paraTitle);
     usertoDoDiv.appendChild(paraDescription);
@@ -93,18 +98,26 @@ function toDoContainerPopulate(userTitle,userDescription) {
 
     div.appendChild(createCheckbox);
     div.appendChild(usertoDoDiv);
-    div.appendChild(button);
+    div.appendChild(deleteBtn);
     div.classList.add('border');
     toDoItemsContainer.appendChild(div);    
     
-    button.addEventListener('click', () => {
+    deleteBtn.addEventListener('click', () => {
+        let localStorageStr;
+        let index = toDoObjectArray.indexOf(obj);
         toDoItemsContainer.removeChild(div);
+        toDoObjectArray.splice(index,1);
+        localStorage.setItem('toDoObjectArray', JSON.stringify(toDoObjectArray));        
+        localStorageStr =  localStorage.getItem('toDoObjectArray');
+        toDoObjectArray = JSON.parse(localStorageStr);
     });
     createCheckbox.addEventListener('change', (e) => {
         if(e.target.checked) {
             paraTitle.classList.add('task-complete');
+            paraDescription.classList.add('task-complete');            
         } else {
             paraTitle.classList.remove('task-complete');
+            paraDescription.classList.remove('task-complete');            
         }
     });
 }
