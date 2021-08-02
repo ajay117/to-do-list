@@ -1,3 +1,6 @@
+import './style.css';
+
+
 let form = document.getElementById('user-form');
 let userInputTitle = document.querySelector('.user-input');
 let userInputDescription = document.querySelector('.description');
