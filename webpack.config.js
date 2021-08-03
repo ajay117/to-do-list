@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
 module.exports = {
+    mode: 'development',
     entry: './src/script.js',
     output: {
         filename: '[name].bundle.js',
@@ -17,6 +18,7 @@ module.exports = {
             }
         ],
     },
+    devtool: 'inline-source-map',
     plugins: [
         new HtmlWebpackPlugin({
             title: 'To Do List',
