@@ -1,8 +1,8 @@
-import './style.css';
+import './style.css'; 
 
 import toDoLogic from './modules/toDoLogic.js';
 import toDoElement from './modules/toDoElement.js';
-import toDoContainerPopulate from './modules/toDoContainerPopulate.js';
+import { toDoContainerPopulate } from './modules/toDoContainerPopulate.js';
 import {popUpForm, hideForm} from './modules/formPopUpAndHide.js';
 
 
@@ -13,7 +13,8 @@ export let toDoItemsContainer = document.querySelector('.to-do-list');
 let addToDoMarker = document.querySelector('.add-to-do-marker');
 let submitButton = document.querySelector('.submit-button');
 let cancelButton = document.querySelector('.cancel-button');
-let toDoObjectArray = []; //Store all to do as obects in Array.
+export let toDoObjectArray = []; //Store all to do as obects in Array.
+let toDoTitleContainer = document.querySelector('.to-do-title');
 
 //If Local Storage length is greater than zero,
 //toDoObjectArray will receive all user data from local storage..
