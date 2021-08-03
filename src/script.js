@@ -29,12 +29,19 @@ if(localStorage.length > 0) {
 
 toDoObjectArray.forEach(obj => {
     let p = document.createElement('p');
-    p.textContent = obj.title;
+    let a = document.createElement('a');
+    a.href = '#';
+
+    a.textContent = obj.title;
     if((obj.title).length > 10) {
-        p.textContent = (obj.title).slice(0,10) + '...';
+        a.textContent = (obj.title).slice(0,10) + '...';
     }
+
+    p.appendChild(a);
     toDoTitleContainer.classList.add('ml-15', 'text-small');
     toDoTitleContainer.appendChild(p);
+
+    
 })
 
 form.addEventListener('submit',toDoLogic);
