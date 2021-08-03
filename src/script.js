@@ -14,7 +14,7 @@ let addToDoMarker = document.querySelector('.add-to-do-marker');
 let submitButton = document.querySelector('.submit-button');
 let cancelButton = document.querySelector('.cancel-button');
 export let toDoObjectArray = []; //Store all to do as obects in Array.
-let toDoTitleContainer = document.querySelector('.to-do-title');
+export let toDoTitleContainer = document.querySelector('.to-do-title');
 
 //If Local Storage length is greater than zero,
 //toDoObjectArray will receive all user data from local storage..
@@ -26,6 +26,16 @@ if(localStorage.length > 0) {
         toDoContainerPopulate(obj.title, obj.description);
     });
 }
+
+toDoObjectArray.forEach(obj => {
+    let p = document.createElement('p');
+    p.textContent = obj.title;
+    if((obj.title).length > 10) {
+        p.textContent = (obj.title).slice(0,10) + '...';
+    }
+    toDoTitleContainer.classList.add('ml-15', 'text-small');
+    toDoTitleContainer.appendChild(p);
+})
 
 form.addEventListener('submit',toDoLogic);
 
@@ -51,3 +61,5 @@ userInputDescription.addEventListener('focus', (e) => {
     e.target.textContent = '';
     userInputDescription.classList.remove('text-light');
 });
+
+

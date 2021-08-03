@@ -34,7 +34,7 @@ textarea {
 .aside {
     flex: 1 0 auto;
     border-right: 2px solid black;
-    height: 100vh;
+    min-height: 100vh;
 }
 .main {
     flex: 4 0 auto;
@@ -116,6 +116,13 @@ textarea {
 .box {
     max-width: 100%;
 }
+.text-small {
+    font-size: 16px;    
+}
+.ml-15 {
+    margin-left: 15px;
+}
+
 /* ||Media Queries */
 
 @media screen and (max-width: 1000px) {
