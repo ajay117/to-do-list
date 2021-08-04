@@ -1,7 +1,8 @@
 import { toDoItemsContainer, toDoObjectArray } from "../script.js";
 
-//Create and Add 'To Do' elements to DOM...
+// Create and Add 'To Do' elements to DOM...
 export function toDoContainerPopulate(obj) {
+    
     let div = document.createElement('div');
     let usertoDoDiv = document.createElement('div'); //Div container for user to do elements...  2nd div
     let paraTitle = document.createElement('p');
@@ -42,7 +43,8 @@ export function toDoContainerPopulate(obj) {
         toDoObjectArray.splice(index,1);
         localStorage.setItem('toDoObjectArray', JSON.stringify(toDoObjectArray));        
         localStorageStr =  localStorage.getItem('toDoObjectArray');
-        toDoObjectArray = JSON.parse(localStorageStr);
+        toDoObjectArray.splice(0,toDoObjectArray.length);
+        toDoObjectArray.push(JSON.parse(localStorageStr));
     });
     createCheckbox.addEventListener('change', (e) => {
         if(e.target.checked) {
