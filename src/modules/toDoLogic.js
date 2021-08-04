@@ -16,7 +16,7 @@ export default function toDoLogic(e) {
     toDoObjectPopulate();
     toDoContainerPopulate(toDoObjectArray[toDoObjectArray.length -1]);
     toDoItemsContainer.classList.remove('hide');
-    toDoTitlePopulate();
+    // toDoTitlePopulate();
     fillDefaultValues();
     form.reset();
 }

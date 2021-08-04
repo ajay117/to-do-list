@@ -11,6 +11,10 @@ h1 {
     font-weight: 400;
     text-decoration: underline;
 }
+h3 {
+    cursor: pointer;
+    margin: 10px 0;
+}
 textarea {
     resize: none;
 }
@@ -35,6 +39,8 @@ textarea {
     flex: 1 0 auto;
     border-right: 2px solid black;
     min-height: 100vh;
+    padding-top: 50px;
+    padding-left: 20px;
 }
 .main {
     flex: 4 0 auto;

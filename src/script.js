@@ -1,3 +1,5 @@
+//New Features to add..
+
 import './style.css'; 
 
 import toDoLogic from './modules/toDoLogic.js';
@@ -15,6 +17,7 @@ let submitButton = document.querySelector('.submit-button');
 let cancelButton = document.querySelector('.cancel-button');
 export let toDoObjectArray = []; //Store all to do as obects in Array.
 export let toDoTitleContainer = document.querySelector('.to-do-title');
+export let home = document.querySelector('.home');
 
 //If Local Storage length is greater than zero,
 //toDoObjectArray will receive all user data from local storage..
@@ -26,27 +29,6 @@ if(localStorage.length > 0) {
         toDoContainerPopulate(obj);
     });
 }
-
-toDoObjectArray.forEach(obj => {
-    let p = document.createElement('p');
-    let a = document.createElement('a');
-    a.href = '#';
-
-    a.textContent = obj.title;
-    if((obj.title).length > 10) {
-        a.textContent = (obj.title).slice(0,10) + '...';
-    }
-
-    p.appendChild(a);
-    toDoTitleContainer.classList.add('ml-15', 'text-small');
-    toDoTitleContainer.appendChild(p);
-
-    a.addEventListener('click', () => {
-        toDoItemsContainer.innerHTML = '';
-        toDoContainerPopulate(obj);
-    });
-    
-})
 
 form.addEventListener('submit',toDoLogic);
 
@@ -74,3 +56,31 @@ userInputDescription.addEventListener('focus', (e) => {
 });
 
 
+
+// home.addEventListener('click', () => {
+//     location.reload();
+// });
+
+
+// toDoObjectArray.forEach(obj => {
+//     let p = document.createElement('p');
+//     let a = document.createElement('a');
+//     a.href = '#';
+
+//     a.textContent = obj.title;
+//     if((obj.title).length > 10) {
+//         a.textContent = (obj.title).slice(0,10) + '...';
+//     }
+
+//     p.appendChild(a);
+//     toDoTitleContainer.classList.add('ml-15', 'text-small');
+//     toDoTitleContainer.appendChild(p);
+
+//     a.addEventListener('click', () => {
+//         toDoItemsContainer.innerHTML = '';
+//         if(toDoObjectArray.includes(obj)) {
+//             toDoContainerPopulate(obj);
+//         }
+//         console.log(toDoObjectArray);
+//     });    
+// })
