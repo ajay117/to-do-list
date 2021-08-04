@@ -23,7 +23,7 @@ if(localStorage.length > 0) {
     toDoObjectArray = JSON.parse(localStorageStr);
 
     toDoObjectArray.forEach(obj => {
-        toDoContainerPopulate(obj.title, obj.description);
+        toDoContainerPopulate(obj);
     });
 }
 
@@ -41,6 +41,10 @@ toDoObjectArray.forEach(obj => {
     toDoTitleContainer.classList.add('ml-15', 'text-small');
     toDoTitleContainer.appendChild(p);
 
+    a.addEventListener('click', () => {
+        toDoItemsContainer.innerHTML = '';
+        toDoContainerPopulate(obj);
+    });
     
 })
 
